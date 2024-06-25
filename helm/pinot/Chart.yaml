@@ -29,7 +29,7 @@ keywords:
   - pinot
 home: https://pinot.apache.org/
 sources:
-  - https://github.com/apache/pinot/tree/master/helm
+  - https://github.com/shahharshil24/pinot/tree/master/helm
 maintainers:
   - name: pinot-dev
     email: dev@pinot.apache.org

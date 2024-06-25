@@ -31,7 +31,7 @@ on:
         required: true
       dockerImageName:
         description: "The docker image name, default is 'apachepinot/pinot-superset'"
-        default: "apachepinot/pinot-superset"
+        default: "shahharshil24/pinot-superset"
         required: true
       tags:
         description: "Tags to push of the image, comma separated, e.g. tag1,tag2,tag3"

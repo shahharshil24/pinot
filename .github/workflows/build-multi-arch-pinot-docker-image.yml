@@ -23,7 +23,7 @@ on:
     inputs:
       gitUrl:
         description: "The Pinot git repo to check out to build, use https."
-        default: "https://github.com/apache/pinot.git"
+        default: "https://github.com/shahharshil24/pinot.git"
         required: true
       commit:
         description: "The branch/commit to check out to build Pinot image."
@@ -31,7 +31,7 @@ on:
         required: true
       dockerImageName:
         description: "The docker image name, default to 'apachepinot/pinot'."
-        default: "apachepinot/pinot"
+        default: "shahharshil24/pinot"
         required: true
       tags:
         description: "Tags to push of the image, comma separated, e.g. tag1,tag2,tag3"

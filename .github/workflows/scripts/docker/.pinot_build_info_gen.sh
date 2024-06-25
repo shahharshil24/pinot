@@ -18,7 +18,7 @@
 # under the License.
 #
 if [ -z "${PINOT_GIT_URL}" ]; then
-  PINOT_GIT_URL="https://github.com/apache/pinot.git"
+  PINOT_GIT_URL="https://github.com/shahharshil24/pinot.git"
 fi
 if [ -z "${PINOT_BRANCH}" ]; then
   PINOT_BRANCH="master"

@@ -23,7 +23,7 @@ LABEL MAINTAINER=dev@pinot.apache.org
 
 ARG PINOT_BRANCH=master
 ARG JDK_VERSION=11
-ARG PINOT_GIT_URL="https://github.com/apache/pinot.git"
+ARG PINOT_GIT_URL="https://github.com/shahharshil24/pinot.git"
 ARG CI=true
 
 RUN echo "Build Pinot based on image: apachepinot/pinot-base-build:${PINOT_BASE_IMAGE_TAG}"

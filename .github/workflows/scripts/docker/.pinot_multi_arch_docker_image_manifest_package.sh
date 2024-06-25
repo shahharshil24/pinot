@@ -21,7 +21,7 @@
 set -x
 
 if [ -z "${DOCKER_IMAGE_NAME}" ]; then
-  DOCKER_IMAGE_NAME="apachepinot/pinot"
+  DOCKER_IMAGE_NAME="shahharshil24/pinot"
 fi
 
 tags=()
