@@ -30,7 +30,7 @@ on:
         default: "master"
         required: true
       dockerImageName:
-        description: "The docker image name, default to 'apachepinot/pinot'."
+        description: "The docker image name, default to 'shahharshil24/pinot'."
         default: "shahharshil24/pinot"
         required: true
       tags:

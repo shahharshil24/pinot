@@ -33,7 +33,7 @@ on:
       - ".github/workflows/**"
 jobs:
   verify-docker:
-    if: github.repository == 'apache/pinot'
+    if: github.repository == 'shahharshil24/pinot'
     name: Verify Docker Image
     runs-on: ubuntu-latest
     steps:
@@ -43,7 +43,7 @@ jobs:
       - name: Build the Docker image
         env:
           DOCKER_FILE_BASE_DIR: "docker/images/pinot"
-          DOCKER_IMAGE_NAME: "apachepinot/pinot"
+          DOCKER_IMAGE_NAME: "shahharshil24/pinot"
           PINOT_GIT_URL: ${{ github.event.inputs.gitUrl }}
           PINOT_BRANCH: ${{ env.GITHUB_REF }}
           PINOT_SHA: ${{ github.sha }}
@@ -53,7 +53,7 @@ jobs:
         uses: aquasecurity/trivy-action@master
         with:
           trivyignores: '.trivyignore'
-          image-ref: 'apachepinot/pinot:${{ github.sha }}'
+          image-ref: 'shahharshil24/pinot:${{ github.sha }}'
           format: 'sarif'
           output: 'trivy-results.sarif'
           vuln-type: 'os,library'

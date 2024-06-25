@@ -45,7 +45,7 @@ on:
 
 jobs:
   linter-test:
-    if: github.repository == 'apache/pinot'
+    if: github.repository == 'shahharshil24/pinot'
     runs-on: ubuntu-latest
     name: Pinot Linter Test Set
     steps:
@@ -71,7 +71,7 @@ jobs:
             --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED
         run: .github/workflows/scripts/.pinot_linter.sh
   unit-test:
-    if: github.repository == 'apache/pinot'
+    if: github.repository == 'shahharshil24/pinot'
     runs-on: ubuntu-latest
     strategy:
       # Changed to false in order to improve coverage using unsafe buffers
@@ -152,7 +152,7 @@ jobs:
           verbose: true
 
   integration-test:
-    if: github.repository == 'apache/pinot'
+    if: github.repository == 'shahharshil24/pinot'
     runs-on: ubuntu-latest
     strategy:
       # Changed to false in order to improve coverage using unsafe buffers
@@ -259,7 +259,7 @@ jobs:
           verbose: true
 
   compatibility-verifier:
-    if: github.repository == 'apache/pinot'
+    if: github.repository == 'shahharshil24/pinot'
     runs-on: ubuntu-latest
     strategy:
       # Changed to false in order to improve coverage using unsafe buffers
@@ -315,7 +315,7 @@ jobs:
         run: .github/workflows/scripts/.pinot_compatibility_verifier.sh
 
   multi-stage-compatibility-verifier:
-    if: github.repository == 'apache/pinot'
+    if: github.repository == 'shahharshil24/pinot'
     runs-on: ubuntu-latest
     strategy:
       # Changed to false in order to improve coverage using unsafe buffers
@@ -371,7 +371,7 @@ jobs:
         run: .github/workflows/scripts/.pinot_compatibility_verifier.sh
 
   quickstarts:
-    if: github.repository == 'apache/pinot'
+    if: github.repository == 'shahharshil24/pinot'
     runs-on: ubuntu-latest
     strategy:
       # Changed to false in order to improve coverage using unsafe buffers

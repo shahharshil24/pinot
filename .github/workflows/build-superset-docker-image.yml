@@ -30,7 +30,7 @@ on:
         default: "linux/amd64"
         required: true
       dockerImageName:
-        description: "The docker image name, default is 'apachepinot/pinot-superset'"
+        description: "The docker image name, default is 'shahharshil24/pinot-superset'"
         default: "shahharshil24/pinot-superset"
         required: true
       tags:
