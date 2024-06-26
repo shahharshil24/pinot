@@ -25,7 +25,7 @@ entries:
         name: pinot-dev
     name: pinot
     sources:
-      - https://github.com/apache/pinot/tree/master/helm
+      - https://github.com/shahharshil24/pinot/tree/master/helm
     urls:
       - pinot-0.2.9.tgz
     version: 0.2.9
@@ -53,7 +53,7 @@ entries:
         name: pinot-dev
     name: pinot
     sources:
-      - https://github.com/apache/pinot/tree/master/helm
+      - https://github.com/shahharshil24/pinot/tree/master/helm
     urls:
       - pinot-0.2.8.tgz
     version: 0.2.8
@@ -81,7 +81,7 @@ entries:
       name: pinot-dev
     name: pinot
     sources:
-    - https://github.com/apache/pinot/tree/master/helm
+    - https://github.com/shahharshil24/pinot/tree/master/helm
     urls:
     - pinot-0.2.7.tgz
     version: 0.2.7
@@ -109,7 +109,7 @@ entries:
       name: pinot-dev
     name: pinot
     sources:
-    - https://github.com/apache/pinot/tree/master/helm
+    - https://github.com/shahharshil24/pinot/tree/master/helm
     urls:
     - pinot-0.2.6.tgz
     version: 0.2.6
@@ -137,7 +137,7 @@ entries:
       name: pinot-dev
     name: pinot
     sources:
-    - https://github.com/apache/pinot/tree/master/helm
+    - https://github.com/shahharshil24/pinot/tree/master/helm
     urls:
     - pinot-0.2.5.tgz
     version: 0.2.5
@@ -165,7 +165,7 @@ entries:
       name: pinot-dev
     name: pinot
     sources:
-    - https://github.com/apache/pinot/tree/master/helm
+    - https://github.com/shahharshil24/pinot/tree/master/helm
     urls:
     - pinot-0.2.4.tgz
     version: 0.2.4
@@ -193,7 +193,7 @@ entries:
       name: pinot-dev
     name: pinot
     sources:
-    - https://github.com/apache/pinot/tree/master/helm
+    - https://github.com/shahharshil24/pinot/tree/master/helm
     urls:
     - pinot-0.2.3.tgz
     version: 0.2.3
@@ -221,7 +221,7 @@ entries:
       name: pinot-dev
     name: pinot
     sources:
-    - https://github.com/apache/pinot/tree/master/helm
+    - https://github.com/shahharshil24/pinot/tree/master/helm
     urls:
     - pinot-0.2.2.tgz
     version: 0.2.2
@@ -249,7 +249,7 @@ entries:
       name: pinot-dev
     name: pinot
     sources:
-    - https://github.com/apache/pinot/tree/master/helm
+    - https://github.com/shahharshil24/pinot/tree/master/helm
     urls:
     - pinot-0.2.1.tgz
     version: 0.2.1
@@ -277,7 +277,7 @@ entries:
       name: pinot-dev
     name: pinot
     sources:
-    - https://github.com/apache/pinot/tree/master/helm
+    - https://github.com/shahharshil24/pinot/tree/master/helm
     urls:
     - pinot-0.2.0.tgz
     version: 0.2.0
@@ -320,7 +320,7 @@ entries:
       name: pinot-dev
     name: presto
     sources:
-    - https://github.com/apache/pinot/tree/master/helm
+    - https://github.com/shahharshil24/pinot/tree/master/helm
     urls:
     - presto-0.2.0.tgz
     version: 0.2.0
