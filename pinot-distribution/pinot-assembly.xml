@@ -229,6 +229,16 @@
       </destName>
     </file>
     <!-- End Include Pinot Segment Uploader Plugins-->
+    <!-- Start Include Pinot Custom scalar functions-->
+    <file>
+      <source>
+        ${pinot.root}/pinot-plugins/pinot-custom-udf/pinot-custom-transform/target/pinot-custom-transform-${project.version}.jar
+      </source>
+      <destName>
+        plugins/pinot-custom-udf/pinot-custom-transform/target/pinot-custom-transform-${project.version}.jar
+      </destName>
+    </file>
+    <!-- End Include Pinot Custom scalar functions-->
     <!-- End Include Pinot Plugins-->
   </files>
   <fileSets>
