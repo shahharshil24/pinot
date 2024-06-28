@@ -240,10 +240,10 @@ public abstract class BaseControllerStarter implements ServiceStartable {
       // Initialize FunctionRegistry before starting the admin application (PinotQueryResource requires it to compile
       // queries)
       FunctionRegistry.init();
-      _adminApp = new ControllerAdminApiApplication(_config);
+      _adminApp = createControllerAdminApp();
       // Do not use this before the invocation of {@link PinotHelixResourceManager::start()}, which happens in {@link
       // ControllerStarter::start()}
-      _helixResourceManager = new PinotHelixResourceManager(_config);
+      _helixResourceManager = createHelixResourceManager();
       // This executor service is used to do async tasks from multiget util or table rebalancing.
       _executorService =
           Executors.newCachedThreadPool(new ThreadFactoryBuilder().setNameFormat("async-task-thread-%d").build());
@@ -297,6 +297,18 @@ public abstract class BaseControllerStarter implements ServiceStartable {
             MAX_STATE_TRANSITIONS_PER_INSTANCE, constraintItem);
   }
 
+  /**
+   * Creates an instance of PinotHelixResourceManager.
+   * <p>
+   * This method can be overridden by subclasses to instantiate the object
+   * with subclasses of PinotHelixResourceManager.
+   * By default, it returns a new PinotHelixResourceManager using the current configuration.
+   *
+   * @return A new instance of PinotHelixResourceManager.
+   */
+  protected PinotHelixResourceManager createHelixResourceManager() {
+    return new PinotHelixResourceManager(_config);
+  }
   public PinotHelixResourceManager getHelixResourceManager() {
     return _helixResourceManager;
   }
@@ -926,5 +938,9 @@ public abstract class BaseControllerStarter implements ServiceStartable {
   @VisibleForTesting
   public ControllerMetrics getControllerMetrics() {
     return _controllerMetrics;
+  }
+
+  protected ControllerAdminApiApplication createControllerAdminApp() {
+    return new ControllerAdminApiApplication(_config);
   }
 }
