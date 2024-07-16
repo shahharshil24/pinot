@@ -40,6 +40,7 @@ RUN git clone ${PINOT_GIT_URL} ${PINOT_BUILD_DIR} && \
     git checkout ${PINOT_BRANCH} && \
     mvn clean install package -DskipTests -Pbin-dist -Pbuild-shaded-jar -Djdk.version=${JDK_VERSION} && \
     rm -rf /root/.m2 && \
+    aws s3 cp s3://pinotdata-hrshil/IIotVaiPinotUDFFunctionsPOC-1.0.jar build/plugins/ && \
     mkdir -p ${PINOT_HOME}/configs && \
     mkdir -p ${PINOT_HOME}/data && \
     cp -r build/* ${PINOT_HOME}/. && \

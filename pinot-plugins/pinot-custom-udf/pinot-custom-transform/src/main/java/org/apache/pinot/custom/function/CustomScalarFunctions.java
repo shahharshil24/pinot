@@ -31,7 +31,6 @@ public class CustomScalarFunctions {
 
   @ScalarFunction(names = {"append_counter"})
   public static String appendCounter(String columnValue) throws InterruptedException {
-    Thread.sleep(100);
     return columnValue + " _ " + _counter.incrementAndGet();
   }
 }
