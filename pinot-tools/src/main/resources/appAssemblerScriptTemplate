@@ -217,6 +217,9 @@ if [ -n "$PLUGINS_INCLUDE" ] ; then
   ALL_JAVA_OPTS="$ALL_JAVA_OPTS -Dplugins.include=$PLUGINS_INCLUDE"
 fi
 
+echo "Using plugins classpath as $PLUGINS_CLASSPATH"
+echo "Using classpath as : $CLASSPATH"
+
 exec "$JAVACMD" $ALL_JAVA_OPTS \
   -classpath "$CLASSPATH" \
   -Dapp.name="@APP_NAME@" \

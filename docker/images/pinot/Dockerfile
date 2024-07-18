@@ -16,8 +16,25 @@
 # specific language governing permissions and limitations
 # under the License.
 #
+
 ARG PINOT_BASE_IMAGE_TAG=11-amazoncorretto
+
+# Stage
+FROM amazon/aws-cli AS import_dependencies
+
+ARG AWS_ACCESS_KEY_ID
+ARG AWS_SECRET_ACCESS_KEY
+ARG AWS_REGION
+ENV PINOT_HOME=/opt/pinot
+ENV PINOT_UDF_HOME=/opt/pinot/udf
+
+RUN aws s3 cp s3://pinotdata-hrshil/pinot-iiot-vai-udf.jar ${PINOT_UDF_HOME}/ && \
+    cd ${PINOT_UDF_HOME} && \
+    ls -lrt
+
+# Stage
 FROM apachepinot/pinot-base-build:${PINOT_BASE_IMAGE_TAG} AS pinot_build_env
+
 
 LABEL MAINTAINER=dev@pinot.apache.org
 
@@ -25,27 +42,33 @@ ARG PINOT_BRANCH=master
 ARG JDK_VERSION=11
 ARG PINOT_GIT_URL="https://github.com/shahharshil24/pinot.git"
 ARG CI=true
+ARG PINOT_UDF_HOME=/opt/pinot/udf
 
 RUN echo "Build Pinot based on image: shahharshil24/pinot-base-build:${PINOT_BASE_IMAGE_TAG}"
 RUN echo "Current build system CPU arch is [ $(uname -m) ]"
-
 RUN echo "Trying to build Pinot from [ ${PINOT_GIT_URL} ] on branch [ ${PINOT_BRANCH} ] and CI [ ${CI} ]"
 ENV PINOT_HOME=/opt/pinot
 ENV PINOT_BUILD_DIR=/opt/pinot-build
 ENV MAVEN_HOME /usr/share/maven
 ENV MAVEN_CONFIG /opt/.m2
+ENV PINOT_UDF_HOME=/opt/pinot/udf
 
-RUN git clone ${PINOT_GIT_URL} ${PINOT_BUILD_DIR} && \
-    cd ${PINOT_BUILD_DIR} && \
-    git checkout ${PINOT_BRANCH} && \
-    mvn clean install package -DskipTests -Pbin-dist -Pbuild-shaded-jar -Djdk.version=${JDK_VERSION} && \
-    rm -rf /root/.m2 && \
-    aws s3 cp s3://pinotdata-hrshil/IIotVaiPinotUDFFunctionsPOC-1.0.jar build/plugins/ && \
-    mkdir -p ${PINOT_HOME}/configs && \
-    mkdir -p ${PINOT_HOME}/data && \
-    cp -r build/* ${PINOT_HOME}/. && \
-    chmod +x ${PINOT_HOME}/bin/*.sh
+COPY --from=import_dependencies ${PINOT_UDF_HOME} ${PINOT_UDF_HOME}
 
+RUN cd ${PINOT_UDF_HOME} && ls -lrt && cd / && ls -lrt && \
+   git clone ${PINOT_GIT_URL} ${PINOT_BUILD_DIR} && \
+   cd ${PINOT_BUILD_DIR} && \
+   git checkout ${PINOT_BRANCH} && \
+   mvn clean install package -DskipTests -Pbin-dist -Pbuild-shaded-jar -Djdk.version=${JDK_VERSION} && \
+   cp -r ${PINOT_UDF_HOME}/. ./build/lib/ && cd build/lib && ls -lrt && cd ../../ && ls -lrt && \
+   cp -r ${PINOT_UDF_HOME}/. ./build/plugins/ && \
+   rm -rf /root/.m2 && \
+   mkdir -p ${PINOT_HOME}/configs && \
+   mkdir -p ${PINOT_HOME}/data && \
+   cp -r build/* ${PINOT_HOME}/. && \
+   chmod +x ${PINOT_HOME}/bin/*.sh
+
+# Stage
 FROM apachepinot/pinot-base-runtime:${PINOT_BASE_IMAGE_TAG}
 
 LABEL MAINTAINER=dev@pinot.apache.org
@@ -61,7 +84,7 @@ COPY etc ${PINOT_HOME}/etc
 COPY examples ${PINOT_HOME}/examples
 
 RUN wget -O ${PINOT_HOME}/etc/jmx_prometheus_javaagent/jmx_prometheus_javaagent-0.18.0.jar https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/0.18.0/jmx_prometheus_javaagent-0.18.0.jar && \
-    ln -s ${PINOT_HOME}/etc/jmx_prometheus_javaagent/jmx_prometheus_javaagent-0.18.0.jar ${PINOT_HOME}/etc/jmx_prometheus_javaagent/jmx_prometheus_javaagent.jar
+   ln -s ${PINOT_HOME}/etc/jmx_prometheus_javaagent/jmx_prometheus_javaagent-0.18.0.jar ${PINOT_HOME}/etc/jmx_prometheus_javaagent/jmx_prometheus_javaagent.jar
 
 # expose ports for controller/broker/server/admin
 EXPOSE 9000 8099 8098 8097 8096
