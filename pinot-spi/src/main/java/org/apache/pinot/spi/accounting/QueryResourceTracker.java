@@ -16,15 +16,31 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.pinot.segment.spi.evaluator.json;
+package org.apache.pinot.spi.accounting;
 
-import org.apache.pinot.segment.spi.evaluator.TransformEvaluator;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 
 /**
- * Introduce an empty interface to allow it to be extended without
- * affecting {@see TransformEvaluator}.
- *
- * This is an evolving SPI and subject to change.
+ * Tracks allocated bytes and CPU time for a query in a server or a broker.
  */
-public interface JsonPathEvaluator extends TransformEvaluator {
+@JsonSerialize
+public interface QueryResourceTracker {
+  /**
+   * QueryId tracked by the implementation.
+   * @return a string containing the query id.
+   */
+  String getQueryId();
+
+  /**
+   * Allocated bytes for a query in a server or broker
+   * @return A long containing the number of bytes allocated to execute the query.
+   */
+  long getAllocatedBytes();
+
+  /**
+   * Total execution CPU Time(nanoseconds) of a query in a server or broker.
+   * @return A long containing the nanoseconds.
+   */
+  long getCpuTimeNs();
 }
