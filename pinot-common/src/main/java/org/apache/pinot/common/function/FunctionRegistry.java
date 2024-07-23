@@ -118,6 +118,7 @@ public class FunctionRegistry {
     Map<String, Map<Integer, FunctionInfo>> functionInfoMap = new HashMap<>();
     Set<Method> methods = PinotReflectionUtils.getMethodsThroughReflection(".*\\.function\\..*", ScalarFunction.class);
     for (Method method : methods) {
+      LOGGER.info("Detected {} function for scalar function", method.getName());
       if (!Modifier.isPublic(method.getModifiers())) {
         continue;
       }
@@ -129,6 +130,7 @@ public class FunctionRegistry {
         String[] names = scalarFunction.names();
         if (names.length == 0) {
           register(canonicalize(method.getName()), functionInfo, numArguments, functionInfoMap);
+          LOGGER.info("Registerd {} function under name {}", method.getName(), canonicalize(method.getName()));
         } else {
           Set<String> canonicalNames = new HashSet<>();
           for (String name : names) {
@@ -138,6 +140,7 @@ public class FunctionRegistry {
           }
           for (String canonicalName : canonicalNames) {
             register(canonicalName, functionInfo, numArguments, functionInfoMap);
+            LOGGER.info("Registerd {} function under name {}", method.getName(), canonicalName);
           }
         }
       }
